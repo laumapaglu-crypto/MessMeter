@@ -1,0 +1,34 @@
+MESSMETER v2 - FAST UPDATE
+
+This update adds the complete meal-demand + QR + waste/compost workflow while keeping your existing Supabase project and accounts.
+
+DO NOT run the original schema.sql or seed.sql again.
+
+1) Keep your existing frontend/.env and backend/.env.
+2) Open Supabase -> SQL Editor -> New query.
+3) Open database/migration_v2.sql from this project, copy ALL of it, paste it into SQL Editor and click Run. Do this once.
+4) In VS Code terminal, from the MessMeter folder run:
+   npm install --workspaces
+5) Then open two terminals:
+   Terminal A: npm run backend
+   Terminal B: npm run frontend
+6) Open the Vite URL, usually http://localhost:5173
+
+NEW FLOW
+Student -> booking window -> I'm eating -> QR ticket -> deadline closes -> manager sees confirmed tickets -> cooking recommendation -> QR scan -> served -> feedback.
+
+WASTE FLOW
+Unserved safe surplus -> rescue offer.
+Plate leftovers / preparation waste -> compost tracking.
+
+TEST MANAGER
+Create a student account, then approve it and add the manager role in Supabase using its UUID:
+
+insert into public.user_roles(user_id, role)
+values ('YOUR_USER_UUID', 'mess_manager')
+on conflict do nothing;
+
+update public.profiles set status='approved' where id='YOUR_USER_UUID';
+
+SECURITY
+Never put SUPABASE_SERVICE_ROLE_KEY in frontend/.env. Never share backend/.env. If a secret/service-role key was previously exposed, rotate it in Supabase.

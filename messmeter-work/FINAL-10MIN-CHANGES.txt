@@ -1,0 +1,7 @@
+MessMeter FINAL 10-MINUTE PATCH
+- Added /history route so Meal history opens from More.
+- Added manager Impact dashboard with waste, compost, farm-use, rescue and sales metrics.
+- Added manager Rescue tab for verified rescue partners and surplus offers.
+- Fixed compost batch creation when batch code is omitted.
+- Fixed rescue partner email handling when email is not supplied.
+- Kept the existing QR ticket/serve flow intact.
